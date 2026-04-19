@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import type { WorkoutPlan, WorkoutLogEntry, WorkoutExercise } from '../types';
 import { apiGetPlan, apiSavePlan, apiUpdatePlan, apiLogWorkout, apiGetLogs, apiGetExercises } from '../Api/Api';
 import { useAuth } from './AuthContext';
+import { ExerciseData } from './SeedWorkoutsData';
 
 const LOCAL_PLAN_KEY = 'hw_plan';
 const LOCAL_LOGS_KEY = 'hw_logs';
@@ -37,16 +38,21 @@ const WorkoutProvider = ({ children }: { children: ReactNode }) => {
     if (localLogs) setLogs(JSON.parse(localLogs));
     if (localExercises) setExercises(JSON.parse(localExercises));
 
-    if (!user) return;
-
     setExercisesLoading(true);
     apiGetExercises()
       .then(ex => {
         setExercises(ex);
         localStorage.setItem(LOCAL_EXERCISES_KEY, JSON.stringify(ex));
       })
-      .catch(() => {})
+      .catch(() => {
+        setExercises(ExerciseData as WorkoutExercise[]);
+        localStorage.setItem(LOCAL_EXERCISES_KEY, JSON.stringify(ExerciseData));
+      })
       .finally(() => setExercisesLoading(false));
+  }, []);
+
+  useEffect(() => {
+    if (!user || user.isGuest) return;
 
     setPlanLoading(true);
     apiGetPlan()

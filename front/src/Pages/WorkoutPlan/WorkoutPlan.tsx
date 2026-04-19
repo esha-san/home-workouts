@@ -169,7 +169,7 @@ const WorkoutPlan = () => {
             {saving ? 'Saving...' : '✓ Save'}
           </button>
           <button className="btn-ghost" onClick={handleLogout}>
-            Sign out
+            {user?.isGuest ? 'Exit Guest' : 'Sign out'}
           </button>
         </div>
       </header>

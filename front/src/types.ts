@@ -38,6 +38,7 @@ export interface WorkoutPlan {
 export interface UserProfile {
   _id: string;
   username: string;
+  isGuest?: boolean;
   weight?: number;
   birthday?: string;
   age?: number;

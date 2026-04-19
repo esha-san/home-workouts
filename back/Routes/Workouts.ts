@@ -4,8 +4,6 @@ import { authMiddleware } from '../Middleware/Auth';
 
 const workoutsRouter = Router();
 
-workoutsRouter.use(authMiddleware);
-
 workoutsRouter.get('/exercises', async (_req, res) => {
   try {
     const exercises = await WorkoutExercise.find({}, { __v: 0 });
@@ -15,6 +13,8 @@ workoutsRouter.get('/exercises', async (_req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
+workoutsRouter.use(authMiddleware);
 
 workoutsRouter.get('/plan', async (req, res) => {
   try {

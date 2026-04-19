@@ -65,6 +65,9 @@ const Index = () => {
         <p className="auth-switch">
           No account? <Link to="/register">Sign up</Link>
         </p>
+        <p className="auth-switch">
+          <Link to="/guest-setup">Continue without an account →</Link>
+        </p>
       </div>
     </div>
   );

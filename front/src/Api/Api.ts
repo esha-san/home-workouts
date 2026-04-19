@@ -1,5 +1,6 @@
 import type { UserProfile, WorkoutPlan, WorkoutLogEntry, RegisterData, WorkoutExercise } from '../types';
 
+
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 const apiFetch = async <T>(path: string, options?: RequestInit): Promise<T> => {
@@ -46,6 +47,6 @@ const apiGetLogs = () =>
   apiFetch<WorkoutLogEntry[]>('/workouts/logs');
 
 const apiGetExercises = () =>
-  apiFetch<WorkoutExercise[]>('/workouts/exercises');
-
+    apiFetch<WorkoutExercise[]>('/workouts/exercises');
+  
 export { apiLogin, apiRegister, apiLogout, apiGetMe, apiUpdateMe, apiGetPlan, apiSavePlan, apiUpdatePlan, apiLogWorkout, apiGetLogs, apiGetExercises };
